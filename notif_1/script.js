@@ -13,9 +13,13 @@ const button = document.querySelector("button")
 button.addEventListener("click", () => {
   Notification.requestPermission().then(parm => {
     if (parm === "granted") {
+      navigator.serviceWorker.ready.then(function (registration) {
+        registration.showNotification('Notification with ServiceWorker');
+      });
       let notification = new Notification('Notification', {
         body: 'This is a test',
         data: { hello: "word" },
+
 
       })
       notification.addEventListener("error", e => {
